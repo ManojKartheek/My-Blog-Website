@@ -87,6 +87,7 @@ DATABASES = {
     }
 }
 
+
 database_url= os.environ.get("DATABASE_URL")
 DATABASES["default"] = dj_database_url.parse(database_url)
 
@@ -137,6 +138,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# MEDIA_ROOT = BASE_DIR / "uploads"
-MEDIA_ROOT = "/uploads"
+MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/post-files/"

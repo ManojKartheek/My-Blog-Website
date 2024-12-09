@@ -33,7 +33,6 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1 localhost").split(" "
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'blog',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'cloudinary',
+    'cloudinary_storage',
+    
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -80,16 +84,17 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 database_url= os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse(database_url)
+DATABASES = {}
+if database_url:
+    DATABASES["default"] = dj_database_url.parse(database_url)
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -138,5 +143,17 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = BASE_DIR / "uploads"
-MEDIA_URL = "/post-files/"
+# MEDIA_ROOT = BASE_DIR / "uploads"
+# MEDIA_URL = "/post-files/"
+
+
+# Cloudinary settings------------->>>>>>>>>>>>>>>>
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME", "dezwgnjna"),
+    "API_KEY": os.environ.get("CLOUDINARY_API_KEY", "344777855516582"),
+    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET", "BKO_9Xj50kpFE-N8ykGebdoauRk"),
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+MEDIA_URL = "/media/"

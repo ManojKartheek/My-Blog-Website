@@ -202,3 +202,7 @@ main {
 #comments h2 {
   color: #464646;
 }
+
+#comments p {
+  color: #0b0101;
+}

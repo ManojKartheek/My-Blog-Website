@@ -54,6 +54,7 @@
     </main>
 
     <section id="comments">
+        <p><strong>Comments:</strong> {{ post.comments.count }}</p>
         <ul>
             {%for comment in comments%}
                 <li>

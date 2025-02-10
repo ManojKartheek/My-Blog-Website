@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-database_url= os.environ.get("DATABASE_URL")
-DATABASES = {}
-if database_url:
-    DATABASES["default"] = dj_database_url.parse(database_url)
+# database_url= os.environ.get("DATABASE_URL")
+# DATABASES = {}
+# if database_url:
+#     DATABASES["default"] = dj_database_url.parse("postgresql://manoj_db_user:tfZn8uLWvzHYmGAhlpYwZorvE4aOtjRW@dpg-cukp7cqn91rc73atpfl0-a.oregon-postgres.render.com/manoj_db")
 # else:
 #     DATABASES = {
 #         'default': {
@@ -95,6 +95,19 @@ if database_url:
 #             'NAME': BASE_DIR / 'db.sqlite3',
 #         }
 #     }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'manoj_db',
+        'USER': 'manoj_db_user',
+        'PASSWORD': 'tfZn8uLWvzHYmGAhlpYwZorvE4aOtjRW',
+        'HOST': 'dpg-cukp7cqn91rc73atpfl0-a.oregon-postgres.render.com',
+        'PORT': '5432',
+    }
+}
+
+
 
 
 # Password validation
